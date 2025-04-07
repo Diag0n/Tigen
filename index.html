@@ -16,11 +16,108 @@
             </div>
     </header>
 
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <div class="item-box">
+                    <img src="kuvat/item1.jpg" alt="Item 1">
+                    <h3>Product 1</h3>
+                    <p>Description 1</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="item-box">
+                    <img src="kuvat/item2.jpg" alt="Item 2">
+                    <h3>Product 2</h3>
+                    <p>Description 2</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="item-box">
+                    <img src="kuvat/item3.jpg" alt="Item 3">
+                    <h3>Product 3</h3>
+                    <p>Description 3</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="item-box">
+                    <img src="kuvat/item4.jpg" alt="Item 4">
+                    <h3>Product 4</h3>
+                    <p>Description 4</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="item-box">
+                    <img src="kuvat/item5.jpg" alt="Item 5">
+                    <h3>Product 5</h3>
+                    <p>Description 5</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="item-box">
+                    <img src="kuvat/item6.jpg" alt="Item 6">
+                    <h3>Product 6</h3>
+                    <p>Description 6</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="item-box">
+                    <img src="kuvat/item7.jpg" alt="Item 7">
+                    <h3>Product 7</h3>
+                    <p>Description 7</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-button prev">&#8249;</button>
+        <button class="carousel-button next">&#8250;</button>
+    </div>
+
     <footer>
         <p>Puh. +358 040 1234 567</p>
         <p>info@tigen.com</p>
         <p>Mannerheimintie 14-20, 00100 Helsinki</p>
         <p>Kauppakeskus Forum, 2. krs.</p>
     </footer>
+
+    <script>
+        const carousel = document.querySelector('.carousel');
+        const items = document.querySelectorAll('.carousel-item');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const itemWidth = 33.333;
+            carousel.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+            
+            // Update active states
+            items.forEach((item, index) => {
+                if (index >= currentIndex && index < currentIndex + 3) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = Math.max(currentIndex - 1, 0);
+            updateCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = Math.min(currentIndex + 1, items.length - 3);
+            updateCarousel();
+        });
+
+        // Auto rotate every 5 seconds
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % (items.length - 2);
+            updateCarousel();
+        }, 10000);
+
+        // Initial setup
+        updateCarousel();
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@ height: 100%;
 margin: 0;
 display: flex;
 flex-direction: column;
-background-color: #351341;
+background-image: url(kuvat/kuva7.jpeg)
 }
 .overlay {
 position: absolute;
@@ -11,8 +11,8 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background-color: rgba(50, 50, 50, 0.7); /*OPACITY 70%*/
-z-index: 1; /*FOOTERIN JA HEADERIN ALLA*/
+background-color: rgba(50, 50, 50, 0.8); /*OPACITY 70%*/
+z-index: 0; /*FOOTERIN JA HEADERIN ALLA*/
 }
 footer {
 display: flex;
@@ -58,4 +58,84 @@ color: black;
     padding: 15px 30px;
     text-align: center;
     border-radius: 5px;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 40px auto;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 20px;
+    padding: 20px;
+}
+
+.carousel-item {
+    min-width: calc(33.333% - 20px);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.item-box {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-item.active {
+    transform: scale(1);
+}
+
+.carousel-item img {
+    max-width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.carousel-item h3 {
+    margin: 10px 0;
+    color: white;
+}
+
+.carousel-item p {
+    color: #cccccc;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(53, 19, 65, 0.8);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.carousel-button:hover {
+    background: rgba(53, 19, 65, 1);
 }
