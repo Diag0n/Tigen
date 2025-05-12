@@ -1,18 +1,22 @@
 html, body {
-height: 100%;
-margin: 0;
-display: flex;
-flex-direction: column;
-background-image: url(kuvat/kuva7.jpeg)
+    height: auto;
+    margin: 0;
+    display: block;
+    flex-direction: column;
+    background-image: url(kuvat/kuva7.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .overlay {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(50, 50, 50, 0.8); /*OPACITY 70%*/
-z-index: 0; /*FOOTERIN JA HEADERIN ALLA*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(50, 50, 50, 0.8); /*OPACITY 70%*/
+    z-index: 0; /* Ensure it is above the background image */
 }
 footer {
 display: flex;
@@ -62,7 +66,7 @@ color: black;
 
 .carousel-container {
     position: relative;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 40px auto;
     overflow: hidden;
     z-index: 1;
@@ -71,71 +75,184 @@ color: black;
 .carousel {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    gap: 20px;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .carousel-item {
-    min-width: calc(33.333% - 20px);
+    min-width: 100%;
     transform: scale(0.9);
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .item-box {
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 20px;
+    padding: 30px;
     color: white;
-    height: 400px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.item-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #351341, #6a1b9a, #351341);
+    opacity: 0.8;
 }
 
 .carousel-item.active {
     transform: scale(1);
 }
 
+.carousel-item.active .item-box {
+    box-shadow: 0 15px 40px rgba(53, 19, 65, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .carousel-item img {
-    max-width: 200px;
-    height: 200px;
+    max-width: 250px;
+    height: 250px;
     object-fit: cover;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.carousel-item.active img {
+    transform: scale(1.05);
 }
 
 .carousel-item h3 {
-    margin: 10px 0;
+    margin: 15px 0;
     color: white;
+    font-size: 1.8em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.carousel-item h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #6a1b9a, transparent);
 }
 
 .carousel-item p {
-    color: #cccccc;
+    color: #e0e0e0;
+    text-align: center;
+    line-height: 1.6;
+    font-size: 1.1em;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(53, 19, 65, 0.8);
+    background: rgba(53, 19, 65, 0.9);
     color: white;
-    padding: 15px 20px;
+    padding: 20px 25px;
     border: none;
     cursor: pointer;
-    font-size: 24px;
-    border-radius: 5px;
+    font-size: 28px;
+    border-radius: 50%;
     z-index: 2;
-}
-
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-button:hover {
-    background: rgba(53, 19, 65, 1);
+    background: rgba(106, 27, 154, 0.95);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.carousel-item.active .item-box {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.product-slots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-left: 10px;
+    gap: 10px;
+    padding: 40px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    margin-top: 20px;
+}
+
+.product-slot {
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-slot:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.product-slot img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.product-slot h3 {
+    margin: 10px 0;
+    font-size: 1.5em;
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.product-slot p {
+    color: #cccccc;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+header, .carousel-container, .product-slots, footer {
+    position: relative;
+    z-index: 1; /* Ensure these elements are above the overlay */
 }

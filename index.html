@@ -20,7 +20,7 @@
         <div class="carousel">
             <div class="carousel-item">
                 <div class="item-box">
-                    <img src="kuvat/item1.jpg" alt="Item 1">
+                    <img src="kuvat/tuotteet/housut1m.jpeg" alt="Item 1">
                     <h3>Product 1</h3>
                     <p>Description 1</p>
                 </div>
@@ -72,6 +72,69 @@
         <button class="carousel-button next">&#8250;</button>
     </div>
 
+    <div class="product-slots">
+        <div class="product-slot">
+            <img src="kuvat/item8.jpg" alt="Item 8">
+            <h3>Product 8</h3>
+            <p>Description 8</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item9.jpg" alt="Item 9">
+            <h3>Product 9</h3>
+            <p>Description 9</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item10.jpg" alt="Item 10">
+            <h3>Product 10</h3>
+            <p>Description 10</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item11.jpg" alt="Item 11">
+            <h3>Product 11</h3>
+            <p>Description 11</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item12.jpg" alt="Item 12">
+            <h3>Product 12</h3>
+            <p>Description 12</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item13.jpg" alt="Item 13">
+            <h3>Product 13</h3>
+            <p>Description 13</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item14.jpg" alt="Item 14">
+            <h3>Product 14</h3>
+            <p>Description 14</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item15.jpg" alt="Item 15">
+            <h3>Product 15</h3>
+            <p>Description 15</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item16.jpg" alt="Item 16">
+            <h3>Product 16</h3>
+            <p>Description 16</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item17.jpg" alt="Item 17">
+            <h3>Product 17</h3>
+            <p>Description 17</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item18.jpg" alt="Item 18">
+            <h3>Product 18</h3>
+            <p>Description 18</p>
+        </div>
+        <div class="product-slot">
+            <img src="kuvat/item19.jpg" alt="Item 19">
+            <h3>Product 19</h3>
+            <p>Description 19</p>
+        </div>
+    </div>
+
     <footer>
         <p>Puh. +358 040 1234 567</p>
         <p>info@tigen.com</p>
@@ -87,12 +150,13 @@
         let currentIndex = 0;
 
         function updateCarousel() {
-            const itemWidth = 33.333;
-            carousel.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+            const itemWidth = 100;
+            const translateX = currentIndex * itemWidth;
+            carousel.style.transform = `translateX(-${translateX}%)`;
             
             // Update active states
             items.forEach((item, index) => {
-                if (index >= currentIndex && index < currentIndex + 3) {
+                if (index === currentIndex) {
                     item.classList.add('active');
                 } else {
                     item.classList.remove('active');
@@ -101,20 +165,24 @@
         }
 
         prevButton.addEventListener('click', () => {
-            currentIndex = Math.max(currentIndex - 1, 0);
-            updateCarousel();
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
         });
 
         nextButton.addEventListener('click', () => {
-            currentIndex = Math.min(currentIndex + 1, items.length - 3);
-            updateCarousel();
+            if (currentIndex < items.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
         });
 
         // Auto rotate every 5 seconds
         setInterval(() => {
-            currentIndex = (currentIndex + 1) % (items.length - 2);
+            currentIndex = (currentIndex + 1) % items.length;
             updateCarousel();
-        }, 10000);
+        }, 5000);
 
         // Initial setup
         updateCarousel();
