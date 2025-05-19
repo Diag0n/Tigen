@@ -1,0 +1,21 @@
+	<?php
+                try {
+                    $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                    $stmt = $pdo->query("SELECT * FROM product LIMIT 7");
+
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<div class="carousel-item">';
+                        echo '  <div class="item-box">';
+                        echo '      <img src="kuvat/tuotteet/' . htmlspecialchars($row['pictureid']) . '.jpeg" alt="' . htmlspecialchars($row['name']) . '">';
+                        echo '      <h3>' . htmlspecialchars($row['name']) . '</h3>';
+                        echo '      <p>' . htmlspecialchars($row['description']) . '</p>';
+                        echo '  </div>';
+                        echo '</div>';
+                    }
+                } catch (PDOException $e) {
+                    echo "<p>Error loading products: " . htmlspecialchars($e->getMessage()) . "</p>";
+                }
+            ?>
+
+
+(MUISTA <?PHP REQUIRE ''; ?> !!!)
