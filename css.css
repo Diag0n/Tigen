@@ -208,12 +208,13 @@ color: black;
 .product-slots {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding-left: 10px;
-    gap: 10px;
-    padding: 40px 0;
+    gap: 20px;
+    padding: 40px;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
-    margin-top: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    justify-content: center;
 }
 
 .product-slot {
@@ -221,10 +222,12 @@ color: black;
     border-radius: 15px;
     padding: 20px;
     color: white;
-    width: 200px;
+    width: 100%;
+    max-width: 250px;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
 }
 
 .product-slot:hover {

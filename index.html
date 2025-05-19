@@ -10,10 +10,12 @@
 
     <div class="overlay"></div>
     <header>
-        <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
-            <div class="buttons">
-                <a href="ostoskori.html">Ostoskori</a>
-            </div>
+        <a href="index.html">
+            <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
+        </a>
+        <div class="buttons">
+            <a href="ostoskori.html">Ostoskori</a>
+        </div>
     </header>
 
     <div class="carousel-container">
@@ -148,6 +150,8 @@
         const prevButton = document.querySelector('.prev');
         const nextButton = document.querySelector('.next');
         let currentIndex = 0;
+        let autoAdvanceInterval = null;
+        const AUTO_ADVANCE_TIME = 8000; // 8 seconds
 
         function updateCarousel() {
             const itemWidth = 100;
@@ -164,28 +168,73 @@
             });
         }
 
-        prevButton.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
+        function resetAutoAdvance() {
+            if (autoAdvanceInterval) {
+                clearInterval(autoAdvanceInterval);
             }
+            autoAdvanceInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateCarousel();
+            }, AUTO_ADVANCE_TIME);
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+            resetAutoAdvance();
         });
 
         nextButton.addEventListener('click', () => {
-            if (currentIndex < items.length - 1) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
-
-        // Auto rotate every 5 seconds
-        setInterval(() => {
             currentIndex = (currentIndex + 1) % items.length;
             updateCarousel();
-        }, 5000);
+            resetAutoAdvance();
+        });
 
         // Initial setup
         updateCarousel();
+        resetAutoAdvance();
+    </script>
+    <script>
+        const bgImages = [
+            'kuvat/kuva7.jpeg',
+            'kuvat/kuva6.jpeg',
+            'kuvat/kuva5.png',
+            'kuvat/kuva4.jpg',
+            'kuvat/kuva3.jpg',
+            'kuvat/kuva2.jpg',
+            'kuvat/kuva1.jpg'
+        ];
+        let bgIndex = 0; // -1 means "use CSS default"
+        function setBackground(url) {
+            document.body.style.backgroundImage = `url('${url}')`;
+            document.documentElement.style.backgroundImage = `url('${url}')`;
+        }
+        function rotateBackgroundRandom() {
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * bgImages.length);
+            } while (nextIndex === bgIndex && bgImages.length > 1);
+            bgIndex = nextIndex;
+            setBackground(bgImages[bgIndex]);
+        }
+        setInterval(rotateBackgroundRandom, 30000);
+
+
+        const pdimage = [
+            'kuvat/tuotteet/housut1m.jpeg',
+            'kuvat/tuotteet/housut2m.jpeg',
+            'kuvat/tuotteet/housut1n.jpg',
+            'kuvat/tuotteet/housut2n.jpg',
+            'kuvat/tuotteet/kengät1m.jpeg',
+            'kuvat/tuotteet/kengät2m.jpeg',
+            'kuvat/tuotteet/kengät1n.jpeg',
+            'kuvat/tuotteet/kengät2n.jpg',
+            'kuvat/tuotteet/paita2m.jpeg',
+            'kuvat/tuotteet/paita1n.jpeg',
+            'kuvat/tuotteet/paita2n.jpg',
+            'kuvat/tuotteet/paita3m.jpeg',
+        ]
+        let pdIndex = 1;
     </script>
 </body>
 </html>

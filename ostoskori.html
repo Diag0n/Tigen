@@ -11,7 +11,9 @@
 <body>
     <div class="overlay"></div>
     <header>
-        <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
+        <a href="index.html">
+            <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
+        </a>
         <div class="search-container">
             <button class="open-search">Haku</button>
             <div class="dropdown-content">
@@ -43,5 +45,27 @@
         <p>Kauppakeskus Forum, 2. krs.</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        const bgImages = [
+            'kuvat/kuva7.jpeg',
+            'kuvat/kuva6.jpeg',
+            'kuvat/kuva5.jpeg',
+            'kuvat/kuva4.jpeg',
+            'kuvat/kuva3.jpeg',
+            'kuvat/kuva2.jpeg',
+            'kuvat/kuva1.jpeg'
+        ];
+        let bgIndex = 0;
+        function rotateBackgroundRandom() {
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * bgImages.length);
+            } while (nextIndex === bgIndex && bgImages.length > 1);
+            bgIndex = nextIndex;
+            document.body.style.backgroundImage = `url('${bgImages[bgIndex]}')`;
+        }
+        rotateBackgroundRandom();
+        setInterval(rotateBackgroundRandom, 30000);
+    </script>
 </body>
 </html>
