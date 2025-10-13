@@ -13,12 +13,15 @@ if ($conn->connect_error) {
 }
 
 function getProduct($conn, $id) {
-    $stmt = $conn->prepare("SELECT nimi, tietoa, hinta FROM tuotteita WHERE id = ?");
+    $stmt = $conn->prepare("SELECT nimi, tietoa, hinta, kuva, tuoteID, maara FROM tuotteita WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc();
 }
+#function getProductImage($conn, $id) {
+#    $stmt = $conn->prepare("SELECT nimi, tietoa, hinta FROM tuotteita WHERE id = ?");
+#}
 ?>
 
 <!DOCTYPE html>
@@ -46,9 +49,9 @@ function getProduct($conn, $id) {
             <?php
             // Define which product IDs belong to carousel items
             $carouselItems = [
-                ["id" => 1, "image" => "kuvat/tuotteet/1.jpeg"],
-                ["id" => 2, "image" => "kuvat/tuotteet/kengät1m.jpeg"],
-                ["id" => 3, "image" => "kuvat/tuotteet/kengät2n.jpg"],
+                ["id" => 1/*, "image" => "kuvat/tuotteet/1.jpeg"*/],
+                ["id" => 2/*, "image" => "kuvat/tuotteet/kengät1m.jpeg"*/],
+                ["id" => 3/*, "image" => "kuvat/tuotteet/kengät2n.jpg"*/],
                 //["id" => 4, "image" => "kuvat/tuotteet/paita2m.jpeg"],
                 ["id" => 5, "image" => "kuvat/tuotteet/paita2m.jpeg"],
                 ["id" => 6, "image" => "kuvat/tuotteet/paita3m.jpeg"],
@@ -59,7 +62,7 @@ function getProduct($conn, $id) {
                 $product = getProduct($conn, $item["id"]);
                 echo '<div class="carousel-item">';
                 echo '<div class="item-box">';
-                echo '<img src="' . $item["image"] . '" alt="' . htmlspecialchars($product["nimi"] ?? "Tuote") . '">';
+                echo '<img src="' . htmlspecialchars($product["kuva"]) . '" alt="' . htmlspecialchars($product["nimi"] ?? "Tuote") . '">';
                 if ($product) {
                     echo '<h3>' . htmlspecialchars($product["nimi"]) . '</h3>';
                     echo '<p>' . htmlspecialchars($product["tietoa"]) . '</p>';
