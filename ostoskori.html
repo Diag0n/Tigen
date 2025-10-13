@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
 </head>
 <body>
+<<<<<<< HEAD
 <header>
     <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
       <div class="search-container">
@@ -18,6 +19,33 @@
             <button onclick="location.href='kategoria2.html'">Kategoria 2</button>
             <button onclick="location.href='kategoria3.html'">Kategoria 3</button>
             <button onclick="location.href='kategoria4.html'">Kategoria 4</button>
+=======
+    <div class="overlay"></div>
+    <header>
+        <a href="index.html">
+            <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
+        </a>
+        <div class="search-container">
+            <button class="open-search">Haku</button>
+            <div class="dropdown-content">
+                <button onclick="location.href='kategoria1.html'">Kategoria 1</button>
+                <button onclick="location.href='kategoria2.html'">Kategoria 2</button>
+                <button onclick="location.href='kategoria3.html'">Kategoria 3</button>
+                <button onclick="location.href='kategoria4.html'">Kategoria 4</button>
+            </div>
+    </header>
+    <h1>Ostoskori</h1>
+    <div class="cart-box">
+        <div class="cart-item">
+            <img src="kuvat/kengät1.jpeg" alt="Tuote 1" class="tuotekuva1"> 
+            <div class="cart-item-info">
+                <p>Tuote 1</p>
+                <p>Hinta: X€</p>
+                <input type="number" value="1" min="1">
+            </div>
+            <br>
+            <button class="remove-item">Poista tuote</button>
+>>>>>>> 5eab3daaaa8d4f223e25fbb51d56a2725e82e2a4
         </div>
 </header>
 <h1>Ostoskori</h1>
@@ -42,5 +70,27 @@
         <p>Kauppakeskus Forum, 2. krs.</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+        const bgImages = [
+            'kuvat/kuva7.jpeg',
+            'kuvat/kuva6.jpeg',
+            'kuvat/kuva5.jpeg',
+            'kuvat/kuva4.jpeg',
+            'kuvat/kuva3.jpeg',
+            'kuvat/kuva2.jpeg',
+            'kuvat/kuva1.jpeg'
+        ];
+        let bgIndex = 0;
+        function rotateBackgroundRandom() {
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * bgImages.length);
+            } while (nextIndex === bgIndex && bgImages.length > 1);
+            bgIndex = nextIndex;
+            document.body.style.backgroundImage = `url('${bgImages[bgIndex]}')`;
+        }
+        rotateBackgroundRandom();
+        setInterval(rotateBackgroundRandom, 30000);
+    </script>
 </body>
 </html>
