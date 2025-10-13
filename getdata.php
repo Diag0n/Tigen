@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header('Content-Type: application/json');
+
 $host = 'nozomi.proxy.rlwy.net';
 $db = 'railway';
 $user = 'postgres';
@@ -8,15 +12,12 @@ $dsn ="pgsql:host=$host;port=$port;dbname=$db;";
 
 try {
     $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
     $stmt = $pdo->query("SELECT * FROM product");
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        echo $row['id'] . "<br>";
-    }
+    $product = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo "Toimii ig";
+    echo json_encode($product);
     } catch (PDOException $e){
-        echo "No vittu >:(" . $e->getMessage();
+        echo json_encode(['VOI NYT-' => $e->getMessage()]);
     }
 
 ?>

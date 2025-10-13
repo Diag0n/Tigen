@@ -1,3 +1,26 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = ""; // default is empty in XAMPP
+$dbname = "tigen";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+function getProduct($conn, $id) {
+    $stmt = $conn->prepare("SELECT nimi, tietoa, hinta FROM tuotteita WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fi">
 <head>
@@ -10,7 +33,7 @@
 
     <div class="overlay"></div>
     <header>
-        <a href="index.html">
+        <a href="index.php">
             <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
         </a>
         <div class="buttons">
@@ -20,121 +43,57 @@
 
     <div class="carousel-container">
         <div class="carousel">
-            <div class="carousel-item">
-                <div class="item-box">
-                    <img src="kuvat/tuotteet/housut1m.jpeg" alt="Item 1">
-                    <h3>Product 1</h3>
-                    <p>Description 1</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="item-box">
-                    <img src="kuvat/item2.jpg" alt="Item 2">
-                    <h3>Product 2</h3>
-                    <p>Description 2</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="item-box">
-                    <img src="kuvat/item3.jpg" alt="Item 3">
-                    <h3>Product 3</h3>
-                    <p>Description 3</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="item-box">
-                    <img src="kuvat/item4.jpg" alt="Item 4">
-                    <h3>Product 4</h3>
-                    <p>Description 4</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="item-box">
-                    <img src="kuvat/item5.jpg" alt="Item 5">
-                    <h3>Product 5</h3>
-                    <p>Description 5</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="item-box">
-                    <img src="kuvat/item6.jpg" alt="Item 6">
-                    <h3>Product 6</h3>
-                    <p>Description 6</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="item-box">
-                    <img src="kuvat/item7.jpg" alt="Item 7">
-                    <h3>Product 7</h3>
-                    <p>Description 7</p>
-                </div>
-            </div>
-        </div>
+            <?php
+            // Define which product IDs belong to carousel items
+            $carouselItems = [
+                ["id" => 1, "image" => "kuvat/tuotteet/1.jpeg"],
+                ["id" => 2, "image" => "kuvat/tuotteet/kengät1m.jpeg"],
+                ["id" => 3, "image" => "kuvat/tuotteet/kengät2n.jpg"],
+                //["id" => 4, "image" => "kuvat/tuotteet/paita2m.jpeg"],
+                ["id" => 5, "image" => "kuvat/tuotteet/paita2m.jpeg"],
+                ["id" => 6, "image" => "kuvat/tuotteet/paita3m.jpeg"],
+                
+            ];
+
+            foreach ($carouselItems as $item) {
+                $product = getProduct($conn, $item["id"]);
+                echo '<div class="carousel-item">';
+                echo '<div class="item-box">';
+                echo '<img src="' . $item["image"] . '" alt="' . htmlspecialchars($product["nimi"] ?? "Tuote") . '">';
+                if ($product) {
+                    echo '<h3>' . htmlspecialchars($product["nimi"]) . '</h3>';
+                    echo '<p>' . htmlspecialchars($product["tietoa"]) . '</p>';
+                    echo '<p><strong>€' . htmlspecialchars($product["hinta"]) . '</strong></p>';
+                } else {
+                    echo '<h3>Tuntematon tuote</h3>';
+                    echo '<p>Ei tietoja saatavilla</p>';
+                }
+                echo '</div></div>';
+            }
+            ?>
+        </div>            
         <button class="carousel-button prev">&#8249;</button>
         <button class="carousel-button next">&#8250;</button>
     </div>
 
     <div class="product-slots">
-        <div class="product-slot">
-            <img src="kuvat/item8.jpg" alt="Item 8">
-            <h3>Product 8</h3>
-            <p>Description 8</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item9.jpg" alt="Item 9">
-            <h3>Product 9</h3>
-            <p>Description 9</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item10.jpg" alt="Item 10">
-            <h3>Product 10</h3>
-            <p>Description 10</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item11.jpg" alt="Item 11">
-            <h3>Product 11</h3>
-            <p>Description 11</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item12.jpg" alt="Item 12">
-            <h3>Product 12</h3>
-            <p>Description 12</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item13.jpg" alt="Item 13">
-            <h3>Product 13</h3>
-            <p>Description 13</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item14.jpg" alt="Item 14">
-            <h3>Product 14</h3>
-            <p>Description 14</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item15.jpg" alt="Item 15">
-            <h3>Product 15</h3>
-            <p>Description 15</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item16.jpg" alt="Item 16">
-            <h3>Product 16</h3>
-            <p>Description 16</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item17.jpg" alt="Item 17">
-            <h3>Product 17</h3>
-            <p>Description 17</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item18.jpg" alt="Item 18">
-            <h3>Product 18</h3>
-            <p>Description 18</p>
-        </div>
-        <div class="product-slot">
-            <img src="kuvat/item19.jpg" alt="Item 19">
-            <h3>Product 19</h3>
-            <p>Description 19</p>
-        </div>
+        <?php
+        $sql = "SELECT id, nimi, tietoa, hinta, kuva FROM tuotteita";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo '<div class="product-slot">';
+                echo '<img src="kuvat/tuotteet/' . htmlspecialchars($row["kuva"]) . '" alt="' . htmlspecialchars($row["nimi"]) . '">';
+                echo '<h3>' . htmlspecialchars($row["nimi"]) . '</h3>';
+                echo '<p>' . htmlspecialchars($row["tietoa"]) . '</p>';
+                echo '<p><strong>€' . htmlspecialchars($row["hinta"]) . '</strong></p>';
+                echo '</div>';
+            }
+        } else {
+            echo "<p>Ei tuotteita saatavilla.</p>";
+        }
+        ?>
     </div>
 
     <footer>
@@ -144,7 +103,7 @@
         <p>Kauppakeskus Forum, 2. krs.</p>
     </footer>
 
-    <script>
+    <!-- <script>
         const carousel = document.querySelector('.carousel');
         const items = document.querySelectorAll('.carousel-item');
         const prevButton = document.querySelector('.prev');
@@ -235,6 +194,6 @@
             'kuvat/tuotteet/paita3m.jpeg',
         ]
         let pdIndex = 1;
-    </script>
+    </script> -->
 </body>
 </html>
