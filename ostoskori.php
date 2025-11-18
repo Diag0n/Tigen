@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ostoskori</title>
+    <link href="css.css" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-image"></div>
+    <div class="overlay"></div>
+    <div class="main-wrapper">
+        <header>
+            <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
+            <div class="search-container">
+                <button class="open-search">Haku</button>
+                <div class="dropdown-content">
+                    <button onclick="location.href='kategoria1.html'">Kategoria 1</button>
+                    <button onclick="location.href='kategoria2.html'">Kategoria 2</button>
+                    <button onclick="location.href='kategoria3.html'">Kategoria 3</button>
+                    <button onclick="location.href='kategoria4.html'">Kategoria 4</button>
+                </div>
+<header>
+    <img src="kuvat/TigenImageLogo.png" alt="Tigen" class="ImageLogo">
+      <div class="search-container">
+        <button class="open-search">Haku</button>
+        <div class="dropdown-content">
+            <button onclick="location.href='kategoria1.html'">Kategoria 1</button>
+            <button onclick="location.href='kategoria2.html'">Kategoria 2</button>
+            <button onclick="location.href='kategoria3.html'">Kategoria 3</button>
+            <button onclick="location.href='kategoria4.html'">Kategoria 4</button>
+            </div>
+        </header>       
+        
+        <div class="cart-box">
+            <h2>Ostoskori</h2>
+            <div class="cart-item">
+                <img src="kuvat/kengät1.jpeg" alt="Tuote 1" class="tuotekuva1"> 
+                <div class="cart-item-info">
+                    <p>Tuote 2</p>
+                    <p>Hinta: X€</p>
+                    <input type="number" value="1" min="1">
+                </div>
+                <button class="remove-item">Poista tuote</button>
+            </div>
+            <div class="cart-item">
+                <img src="kuvat/kengät1.jpeg" alt="Tuote 1" class="tuotekuva1"> 
+                <div class="cart-item-info">
+                    <p>Tuote 1</p>
+                    <p>Hinta: X€</p>
+                    <input type="number" value="1" min="1">
+                </div>
+                <button class="remove-item">Poista tuote</button>
+            </div>
+                <div class="shipping-container">
+                    <span>Toimituskulut</span>
+                    <span>10,00€</span>
+                </div>
+                <div class="shipping-container">
+                    <span>Tuotteet</span>
+                    <span>0,00€</span>
+                </div>
+            <div class="total-container">
+                <span>Kokonaissumma</span>
+                <span>10,00€</span>
+            </div>
+            <p class="tax-info">sis. ALV 24%</p>
+            <button class="log-in-button">Kirjaudu sisään</button>
+            <button class="buy-button">Jatka kirjautumatta</button>
+        </div>
+        <footer>
+            <p>Puh. +358 040 1234 567</p>
+            <p>info@tigen.com</p>
+            <p>Mannerheimintie 14-20, 00100 Helsinki</p>
+            <p>Kauppakeskus Forum, 2. krs.</p>
+        </footer>
+    </div>
+        </div>
+</header>
+<h1>Ostoskori</h1>
+<div class="cart-box">
+    <div class="cart-item">
+        <img src="kuvat/kengät1.jpeg" alt="Tuote 1" class="tuotekuva1"> 
+        <div class="cart-item-info">
+            <p>Tuote 1</p>
+            <p>Hinta: X€</p>
+            <input type="number" value="1" min="1">
+        </div>
+        <br>
+        <button class="remove-item">Poista tuote</button>
+    </div>
+    <button class="buy-button">Osta</button>
+</div>
+
+    <footer>
+        <p>Puh. +358 040 1234 567</p>
+        <p>info@tigen.com</p>
+        <p>Mannerheimintie 14-20, 00100 Helsinki</p>
+        <p>Kauppakeskus Forum, 2. krs.</p>
+    </footer>
+>>>>>>> d97ce4f2fe8d378ff2ef8172fc982d3210855337
+    <script src="script.js"></script>
+    <script>
+        const bgImages = [
+            'kuvat/kuva7.jpeg',
+            'kuvat/kuva6.jpeg',
+            'kuvat/kuva5.jpeg',
+            'kuvat/kuva4.jpeg',
+            'kuvat/kuva3.jpeg',
+            'kuvat/kuva2.jpeg',
+            'kuvat/kuva1.jpeg'
+        ];
+        let bgIndex = 0;
+        function rotateBackgroundRandom() {
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * bgImages.length);
+            } while (nextIndex === bgIndex && bgImages.length > 1);
+            bgIndex = nextIndex;
+            document.body.style.backgroundImage = `url('${bgImages[bgIndex]}')`;
+        }
+        rotateBackgroundRandom();
+        setInterval(rotateBackgroundRandom, 30000);
+    </script>
+</body>
+</html>
